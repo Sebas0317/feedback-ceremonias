@@ -19,69 +19,87 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    /* Fondo general crema */
+    /* Fondo general negro */
     .stApp {
-        background-color: #F5F1E8;
+        background-color: #000000;
     }
     
     /* Título principal */
     h1 {
-        color: #1a1a1a;
+        color: #ffffff;
         font-weight: 600;
         padding-bottom: 12px;
-        border-bottom: 3px solid #8B7355;
+        border-bottom: 3px solid #ffffff;
     }
     
     /* Subtítulos */
     h3 {
-        color: #2d2d2d;
+        color: #ffffff;
         font-weight: 500;
         margin-top: 24px;
     }
     
     /* Labels de campos */
     .stTextInput label, .stTextArea label, .stSelectbox label, .stMultiSelect label {
-        color: #1a1a1a;
+        color: #ffffff !important;
         font-weight: 500;
     }
     
-    /* Inputs con fondo más claro */
+    /* Inputs con fondo blanco y texto negro */
     .stTextInput input, .stTextArea textarea {
-        background-color: #FFFDF7;
-        border: 1px solid #D4C4B0;
+        background-color: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        color: #000000 !important;
     }
     
-    /* Botón de envío - tono café elegante */
+    /* Placeholder en inputs */
+    .stTextInput input::placeholder, .stTextArea textarea::placeholder {
+        color: #666666 !important;
+    }
+    
+    /* Radio buttons - texto blanco */
+    .stRadio label, .stRadio div[role="radiogroup"] label {
+        color: #ffffff !important;
+    }
+    
+    /* Checkboxes - texto blanco */
+    .stCheckbox label, .stCheckbox span {
+        color: #ffffff !important;
+    }
+    
+    /* Botón de envío - blanco con texto negro */
     .stButton > button {
-        background-color: #6B5444;
-        color: #FFFDF7;
+        background-color: #ffffff;
+        color: #000000;
         font-weight: 600;
         border: none;
         padding: 12px 30px;
         border-radius: 6px;
         width: 100%;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(255,255,255,0.2);
     }
     
     .stButton > button:hover {
-        background-color: #8B7355;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        background-color: #e0e0e0;
+        box-shadow: 0 4px 8px rgba(255,255,255,0.3);
         transform: translateY(-1px);
     }
     
-    /* Mensajes de éxito - verde suave */
+    /* Mensajes de éxito - fondo blanco con texto negro */
     .stSuccess {
-        background-color: #E8F5E9;
-        border-left: 4px solid #6B9B6E;
+        background-color: #ffffff;
+        border-left: 4px solid #4CAF50;
         border-radius: 6px;
+        color: #000000 !important;
     }
     
-    /* Mensajes de error - rojo suave */
+    /* Mensajes de error - fondo blanco con texto negro */
     .stError {
-        background-color: #FFEBEE;
-        border-left: 4px solid #C76B6B;
+        background-color: #ffffff;
+        border-left: 4px solid #f44336;
         border-radius: 6px;
+        color: #000000 !important;
     }
     
     /* Contenedor del formulario */
@@ -91,19 +109,19 @@ st.markdown("""
         max-width: 700px;
     }
     
-    /* Radio buttons y checkboxes */
-    .stRadio label, .stCheckbox label {
-        color: #2d2d2d;
-    }
-    
     /* Texto descriptivo */
     p {
-        color: #4a4a4a;
+        color: #ffffff;
     }
     
     /* Divisor */
     hr {
-        border-color: #D4C4B0;
+        border-color: #ffffff;
+    }
+    
+    /* Help text */
+    .stTextInput small, .stTextArea small {
+        color: #cccccc !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -249,7 +267,7 @@ def main():
     # Encabezado
     st.title("📋 Feedback de Ceremonias Ágiles")
     st.markdown("""
-        <p style='color: #666; font-size: 16px; margin-bottom: 30px;'>
+        <p style='color: #ffffff; font-size: 16px; margin-bottom: 30px;'>
         Tu opinión es fundamental para mejorar nuestras ceremonias Sprint a Sprint.
         Por favor completa todos los campos con sinceridad.
         </p>
@@ -414,9 +432,9 @@ def main():
     if st.session_state.form_submitted:
         st.success("### ¡Gracias por tu feedback! 🚀")
         st.markdown("""
-            <div style='background-color: #f0f0f0; padding: 20px; border-radius: 8px; 
-                        border-left: 4px solid #1a1a1a; margin-top: 20px;'>
-                <p style='color: #333; margin: 0; font-size: 16px;'>
+            <div style='background-color: #ffffff; padding: 20px; border-radius: 8px; 
+                        border-left: 4px solid #4CAF50; margin-top: 20px;'>
+                <p style='color: #000000; margin: 0; font-size: 16px;'>
                     Tu respuesta ha sido registrada exitosamente.<br>
                     <strong>Tu opinión ayudará a mejorar nuestras ceremonias Sprint a Sprint.</strong>
                 </p>
