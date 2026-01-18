@@ -107,10 +107,10 @@ st.markdown("""
     
     /* Mensajes de éxito - fondo blanco con texto negro */
     .stSuccess {
-        background-color: #ffffff;
+        background-color: #000000;
         border-left: 4px solid #4CAF50;
         border-radius: 6px;
-        color: #000000 !important;
+        color: #ffffff !important;
     }
     
     /* Mensajes de error - fondo blanco con texto negro */
