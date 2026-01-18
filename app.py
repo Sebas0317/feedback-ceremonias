@@ -150,7 +150,7 @@ st.markdown("""
 # ============================================================================
 
 CSV_FILE = "responses.csv"
-CORPORATE_DOMAIN = "@holatest"
+CORPORATE_DOMAIN = "@interrapidisimo.com"
 CURRENT_SPRINT = 1  # ⚙️ CAMBIAR ESTE NÚMERO CADA SPRINT
 
 CEREMONY_OPTIONS = [
