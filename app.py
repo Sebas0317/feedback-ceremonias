@@ -19,24 +19,24 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    /* Fondo general */
+    /* Fondo general crema */
     .stApp {
-        background-color: #f5f5f5;
+        background-color: #F5F1E8;
     }
     
     /* Título principal */
     h1 {
         color: #1a1a1a;
         font-weight: 600;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #333;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #8B7355;
     }
     
     /* Subtítulos */
     h3 {
-        color: #333;
+        color: #2d2d2d;
         font-weight: 500;
-        margin-top: 20px;
+        margin-top: 24px;
     }
     
     /* Labels de campos */
@@ -45,26 +45,43 @@ st.markdown("""
         font-weight: 500;
     }
     
-    /* Botón de envío */
+    /* Inputs con fondo más claro */
+    .stTextInput input, .stTextArea textarea {
+        background-color: #FFFDF7;
+        border: 1px solid #D4C4B0;
+    }
+    
+    /* Botón de envío - tono café elegante */
     .stButton > button {
-        background-color: #1a1a1a;
-        color: white;
+        background-color: #6B5444;
+        color: #FFFDF7;
         font-weight: 600;
         border: none;
         padding: 12px 30px;
-        border-radius: 4px;
+        border-radius: 6px;
         width: 100%;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .stButton > button:hover {
-        background-color: #333;
-        border: none;
+        background-color: #8B7355;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        transform: translateY(-1px);
     }
     
-    /* Mensajes de error */
-    .stAlert {
-        border-radius: 4px;
+    /* Mensajes de éxito - verde suave */
+    .stSuccess {
+        background-color: #E8F5E9;
+        border-left: 4px solid #6B9B6E;
+        border-radius: 6px;
+    }
+    
+    /* Mensajes de error - rojo suave */
+    .stError {
+        background-color: #FFEBEE;
+        border-left: 4px solid #C76B6B;
+        border-radius: 6px;
     }
     
     /* Contenedor del formulario */
@@ -76,7 +93,17 @@ st.markdown("""
     
     /* Radio buttons y checkboxes */
     .stRadio label, .stCheckbox label {
-        color: #333;
+        color: #2d2d2d;
+    }
+    
+    /* Texto descriptivo */
+    p {
+        color: #4a4a4a;
+    }
+    
+    /* Divisor */
+    hr {
+        border-color: #D4C4B0;
     }
     </style>
 """, unsafe_allow_html=True)
