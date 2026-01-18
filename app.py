@@ -283,25 +283,29 @@ def main():
     with st.form("feedback_form", clear_on_submit=False):
         
         # Campo 1: Email
+        st.markdown("**1. Correo electrónico corporativo ***")
         email = st.text_input(
-            "1. Correo electrónico corporativo *",
+            "Correo electrónico",
             value=st.session_state.email,
             placeholder=f"ejemplo{CORPORATE_DOMAIN}",
             help=f"Solo se aceptan correos con dominio {CORPORATE_DOMAIN}",
-            key="email_input"
+            key="email_input",
+            label_visibility="collapsed"
         )
         
         # Campo 2: Identificación del equipo
+        st.markdown("**2. Identificación del equipo ***")
         team_id = st.text_input(
-            "2. Identificación del equipo *",
+            "Identificación del equipo",
             value=st.session_state.team_id,
             placeholder="Nombre del proyecto - célula",
             help="Ejemplo: Proyecto Phoenix - Célula Backend",
-            key="team_id_input"
+            key="team_id_input",
+            label_visibility="collapsed"
         )
         
         # Campo 3: Tipo de ceremonias
-        st.markdown("### 3. Tipo de ceremonias *")
+        st.markdown("**3. Tipo de ceremonias ***")
         ceremony_types = []
         for ceremony in CEREMONY_OPTIONS:
             # Inicializar estado de checkbox si no existe
@@ -313,9 +317,9 @@ def main():
                 ceremony_types.append(ceremony)
         
         # Campo 4: Calificación de valor
-        st.markdown("### 4. ¿Cómo calificas el valor obtenido en las ceremonias frente al tiempo dedicado? *")
+        st.markdown("**4. ¿Cómo calificas el valor obtenido en las ceremonias frente al tiempo dedicado? ***")
         value_rating = st.radio(
-            "Selecciona tu calificación:",
+            "Calificación",
             options=[1, 2, 3, 4, 5],
             format_func=lambda x: {
                 1: "1 - Sin valor / Tiempo perdido",
@@ -325,36 +329,42 @@ def main():
                 5: "5 - Excelente valor / Superó expectativas"
             }[x],
             horizontal=False,
-            key="rating"
+            key="rating",
+            label_visibility="collapsed"
         )
         
         # Campo 5: Objetivo claro y timebox
-        st.markdown("### 5. ¿La sesión contó con un objetivo claro, manejo del tiempo (Timebox) y evitó discusiones improductivas? *")
+        st.markdown("**5. ¿La sesión contó con un objetivo claro, manejo del tiempo (Timebox) y evitó discusiones improductivas? ***")
         had_clear_objective = st.radio(
-            "Tu respuesta:",
+            "Respuesta",
             options=["Sí", "No"],
             horizontal=True,
-            key="objective"
+            key="objective",
+            label_visibility="collapsed"
         )
         
         # Campo 6: Factor que afectó el valor
+        st.markdown("**6. ¿Qué factor afectó más el valor de las sesiones? ***")
         main_affecting_factor = st.text_area(
-            "6. ¿Qué factor afectó más el valor de las sesiones? *",
+            "Factor que afectó el valor",
             value=st.session_state.main_affecting_factor,
             placeholder="Describe el principal factor que impactó (positiva o negativamente) el valor de las ceremonias...",
             height=120,
             help="Sé específico: ¿Fue la preparación, la facilitación, la participación del equipo, las herramientas, etc.?",
-            key="factor_input"
+            key="factor_input",
+            label_visibility="collapsed"
         )
         
         # Campo 7: Acción de mejora
+        st.markdown("**7. ¿Qué acción específica debería tomarse para que la próxima sesión sea un '5'? ***")
         improvement_action = st.text_area(
-            "7. ¿Qué acción específica debería tomarse para que la próxima sesión sea un '5'? *",
+            "Acción de mejora",
             value=st.session_state.improvement_action,
             placeholder="Propón una acción concreta y accionable...",
             height=120,
             help="Piensa en algo específico que podamos implementar en el próximo sprint",
-            key="action_input"
+            key="action_input",
+            label_visibility="collapsed"
         )
         
         # Separador antes del botón
