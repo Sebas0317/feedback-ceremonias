@@ -107,10 +107,10 @@ st.markdown("""
     
     /* Mensajes de éxito - fondo blanco con texto negro */
     .stSuccess {
-        background-color: #000000;
+        background-color: #ffffff;
         border-left: 4px solid #4CAF50;
         border-radius: 6px;
-        color: #ffffff !important;
+        color: #000000 !important;
     }
     
     /* Mensajes de error - fondo blanco con texto negro */
@@ -151,6 +151,7 @@ st.markdown("""
 
 CSV_FILE = "responses.csv"
 CORPORATE_DOMAIN = "@holatest"
+CURRENT_SPRINT = 1  # ⚙️ CAMBIAR ESTE NÚMERO CADA SPRINT
 
 CEREMONY_OPTIONS = [
     "Daily Scrum",
@@ -171,6 +172,7 @@ def initialize_csv():
     if not os.path.exists(CSV_FILE):
         df = pd.DataFrame(columns=[
             "timestamp",
+            "sprint_number",
             "email",
             "team_id",
             "ceremony_types",
@@ -182,21 +184,24 @@ def initialize_csv():
         df.to_csv(CSV_FILE, index=False, encoding='utf-8')
 
 
-def email_exists(email):
+def email_exists(email, sprint_number):
     """
-    Verifica si un email ya está registrado en el CSV.
+    Verifica si un email ya está registrado en el CSV para un sprint específico.
     
     Args:
         email (str): Email a verificar
+        sprint_number (int): Número de sprint
         
     Returns:
-        bool: True si el email existe, False en caso contrario
+        bool: True si el email existe en ese sprint, False en caso contrario
     """
     if not os.path.exists(CSV_FILE):
         return False
     
     df = pd.read_csv(CSV_FILE, encoding='utf-8')
-    return email.lower() in df['email'].str.lower().values
+    # Verificar si existe la combinación email + sprint
+    return ((df['email'].str.lower() == email.lower()) & 
+            (df['sprint_number'] == sprint_number)).any()
 
 
 def validate_email(email):
@@ -212,12 +217,13 @@ def validate_email(email):
     return email.lower().endswith(CORPORATE_DOMAIN.lower())
 
 
-def save_response(data):
+def save_response(data, sprint_number):
     """
     Guarda una nueva respuesta en el archivo CSV.
     
     Args:
         data (dict): Diccionario con los datos del formulario
+        sprint_number (int): Número de sprint actual
         
     Returns:
         bool: True si se guardó exitosamente, False en caso contrario
@@ -229,6 +235,7 @@ def save_response(data):
         # Crear diccionario ordenado con timestamp PRIMERO
         ordered_data = {
             'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'sprint_number': sprint_number,
             'email': data['email'],
             'team_id': data['team_id'],
             'ceremony_types': ceremony_types_str,
@@ -285,7 +292,10 @@ def main():
     
     # Encabezado
     st.title("📋 Feedback de Ceremonias Ágiles")
-    st.markdown("""
+    st.markdown(f"""
+        <p style='color: #ffffff; font-size: 16px; margin-bottom: 10px;'>
+        <strong>Sprint {CURRENT_SPRINT}</strong>
+        </p>
         <p style='color: #ffffff; font-size: 16px; margin-bottom: 30px;'>
         Tu opinión es fundamental para mejorar nuestras ceremonias Sprint a Sprint.
         Por favor completa todos los campos con sinceridad.
@@ -415,8 +425,8 @@ def main():
                 errors.append("El correo electrónico es obligatorio")
             elif not validate_email(email):
                 errors.append(f"El correo debe terminar en {CORPORATE_DOMAIN}")
-            elif email_exists(email):
-                errors.append("⚠️ Este correo ya ha sido registrado. No puedes enviar el formulario nuevamente.")
+            elif email_exists(email, CURRENT_SPRINT):
+                errors.append(f"⚠️ Este correo ya ha sido registrado para el Sprint {CURRENT_SPRINT}. No puedes enviar el formulario nuevamente para este sprint.")
             
             # Validar otros campos obligatorios
             if not team_id:
@@ -449,7 +459,7 @@ def main():
                 }
                 
                 # Guardar
-                if save_response(data):
+                if save_response(data, CURRENT_SPRINT):
                     st.session_state.form_submitted = True
                     # Limpiar el formulario después del envío exitoso
                     reset_form()
