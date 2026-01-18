@@ -86,6 +86,25 @@ st.markdown("""
         transform: translateY(-1px);
     }
     
+    /* Botón de envío del formulario - negro con texto blanco */
+    .stFormSubmitButton > button {
+        background-color: #000000;
+        color: #ffffff !important;
+        font-weight: 600;
+        border: 2px solid #ffffff;
+        padding: 12px 30px;
+        border-radius: 6px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .stFormSubmitButton > button:hover {
+        background-color: #1a1a1a;
+        border-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(255,255,255,0.3);
+        transform: translateY(-1px);
+    }
+    
     /* Mensajes de éxito - fondo blanco con texto negro */
     .stSuccess {
         background-color: #ffffff;
